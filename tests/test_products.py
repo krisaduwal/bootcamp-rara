@@ -1,3 +1,5 @@
+import time
+
 from tests.test_createOrder import *
 from tests.test_logIn import *
 from pages.products import ProductsPage
@@ -23,6 +25,23 @@ class CreateProduct(LogIn):
         createProduct.clickSave()
         createProduct.verifySuccess()
 
+    def test_deleteProduct(self):
+        # self.test_createProduct()
+        time.sleep(5)
+        driver = self.driver
+        deleteProduct = ProductsPage(driver)
+        deleteProduct.clickDelete()
+        deleteProduct.deleteToast()
+
+    def test_editProduct(self):
+        time.sleep(5)
+        driver = self.driver
+        driver.implicitly_wait(5)
+        editProduct = ProductsPage(driver)
+        editProduct.clickEdit()
+        editProduct.clickStatus("out_of_stock")
+        editProduct.clickSave()
+        editProduct.editToast()
 
     @classmethod
     def tearDownClass(cls):

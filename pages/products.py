@@ -13,6 +13,10 @@ class Locators():
     unitBox = '/html/body/div[3]/div[3]/div/section/div/div[4]/div/select'
     saveBox = '/html/body/div[3]/div[3]/div/section/footer/button[1]'
     toastTitle = '/html/body/div[1]/div/div[2]/div[3]/div/div/div[1]/div[2]'
+    deleteButton = '/html/body/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[2]/div[3]/div[1]/div[2]/div/div[1]/div[5]/div/button[2]'
+    toastDel = '/html/body/div[1]/div/div[2]/div[3]/div/div/div[1]/div[2]'
+    editButton = '/html/body/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[2]/div[3]/div[1]/div[2]/div/div[1]/div[5]/div/button[1]'
+    toastEdit = '/html/body/div[1]/div/div[2]/div[3]/div/div/div[1]/div[2]'
 
 
 class ProductsPage():
@@ -28,6 +32,10 @@ class ProductsPage():
         self.unitBox = Locators.unitBox
         self.saveBox = Locators.saveBox
         self.toastTitle = Locators.toastTitle
+        self.deleteButton = Locators.deleteButton
+        self.toastDel = Locators.toastDel
+        self.editButton = Locators.editButton
+        self.toastEdit = Locators.toastEdit
 
     def clickProducts(self):
         self.driver.find_element(By.XPATH, self.productsButton).click()
@@ -71,6 +79,37 @@ class ProductsPage():
             print(f"toast message: {self.toastEl}")
             assert "product created" in self.toastEl.lower()
             print("toast message verified, product created")
+
+        except Exception as e:
+            print(f"failed to verify toast message: {str(e)}")
+
+    def clickDelete(self):
+        self.driver.find_element(By.XPATH, self.deleteButton).click()
+        time.sleep(1)
+
+    def deleteToast(self):
+
+        try:
+            self.driver.implicitly_wait(10)
+            self.delToast = self.driver.find_element(By.XPATH, self.toastDel).text
+            print(f"toast message: {self.delToast}")
+            assert "product deleted" in self.delToast.lower()
+            print("toast message verified, product deleted")
+
+        except Exception as e:
+            print(f"failed to verify toast message: {str(e)}")
+
+    def clickEdit(self):
+        self.driver.find_element(By.XPATH, self.editButton).click()
+        time.sleep(1)
+
+    def editToast(self):
+        try:
+            self.driver.implicitly_wait(10)
+            self.updateToast = self.driver.find_element(By.XPATH, self.toastEdit).text
+            print(f"toast message: {self.updateToast}")
+            assert "product updated" in self.updateToast.lower()
+            print("toast message verified, product updated")
 
         except Exception as e:
             print(f"failed to verify toast message: {str(e)}")

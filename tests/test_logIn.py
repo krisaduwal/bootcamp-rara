@@ -15,11 +15,12 @@ class LogIn(unittest.TestCase):
         cls.driver = webdriver.Chrome(service=service)
         cls.driver.implicitly_wait(10)
         cls.driver.maximize_window()
-        cls.driver.get("http://localhost:5173/")
+        # cls.driver.get("http://localhost:5173/")
 
 
     def test_logIn(self):
         driver = self.driver
+        driver.get("http://localhost:5173/")
         login = LoginPage(driver)
         login.enter_email('krisha.duwal@fleetpanda.com')
         login.enter_password('Test@123')
@@ -28,9 +29,10 @@ class LogIn(unittest.TestCase):
         login.verifyDashboard()
         login.setDarkmode()
 
-    def test_invalid_creds(self):
-        self.test_logIn()
+    def test_notvalid_creds(self):
+        # self.test_logIn()
         driver = self.driver
+        driver.get("http://localhost:5173/")
         invalidLogin = LoginPage(driver)
         invalidLogin.enter_invalidEmail('k@d.com')
         invalidLogin.enter_invalidPassword('985434567')

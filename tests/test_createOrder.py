@@ -7,7 +7,7 @@ class CreateOrderTest(LogIn):
         LogIn.setUpClass()
         print("setting up")
 
-    def test_createOrder(self):
+    def test_createRecurringOrder(self):
         self.test_logIn()
         # LogIn.test_logIn(self.driver)
         driver = self.driver
@@ -27,7 +27,7 @@ class CreateOrderTest(LogIn):
         createOrder.clickCheckbox()
         createOrder.inputQuantity("500")
         createOrder.clickSelectDriver("Rohan Magar")
-        createOrder.clickAssetCategory(" Truck")
+        createOrder.clickAssetCategory("Truck")
         createOrder.enableReccuring()
         createOrder.clickFrequency("daily")
         # createOrder.clickRecuringEndDate("09/02/2024 11:11 AM")
